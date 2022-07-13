@@ -45,7 +45,6 @@
               $( ".panel-body" ).prepend("Oops! something went wrong.");
           }
           let  html = '';
-          let showBtn = false;
            for (let i = 0; i < response.items.length; i++){
 
               if(response.items[i].id.kind == 'youtube#video'){
@@ -61,9 +60,8 @@
                               </div>
                             </div>`;
                 }
-                showBtn = true;
             }
-            if(showBtn){
+            if(html != ''){
               loadMoreBtn.data('nextPageToken', response.nextPageToken).show();
             }
             $( "#videos-list" ).append( html);
