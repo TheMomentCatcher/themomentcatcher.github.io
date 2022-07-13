@@ -1,0 +1,72 @@
+<section id="videos">
+    <div class="container blogpost">
+      <h1>Videos</h1>
+      <p>On this page you can see some of my latest videos.</p>
+      <p>
+        My greatest hope is that those videos will inspire many people to go out more often and experience the natural
+        world with all of their senses. I hope, that we will all learn to understand and value more the real significance of
+        this extraordinary and exceptionally complex living organism,
+        of which we are a part.
+      </p>
+      <p>
+        Please, visit my <a href="https://www.youtube.com/channel/{{ site.youtube_chanel_id }}?sub_confirmation=1" target="_blank">YouTube Channel</a>,
+        subscribe and click on the bell icon, so that you get notified when a new video is available.
+      </p>
+      <div class="panel panel-default">
+        <div class="panel-body row" id="videos-list"></div>
+        <button
+            id="load-more"
+            onclick="loadVideos()"
+            class="btn btn-success btn-lg btn-block"
+        >Load more +</button>
+      </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#load-more').hide();
+    loadVideos();
+  });
+
+  function loadVideos(){
+
+      let pageToken = '';
+      let loadMoreBtn = $('#load-more');
+
+      loadMoreBtn.hide();
+
+      if(loadMoreBtn.data('nextPageToken')){
+        pageToken = '&pageToken=' + loadMoreBtn.data('nextPageToken');
+      }
+
+      $.get("https://youtube.googleapis.com/youtube/v3/search?part=snippet&order=date&key={{site.youtube_api_key}}&channelId={{site.youtube_chanel_id}}&maxResults={{site.paginate}}" + pageToken, function(response, status){
+          if(status  !== "success"){
+              $( ".panel-body" ).prepend("Oops! something went wrong.");
+          }
+          let  html = '';
+          let showBtn = false;
+           for (let i = 0; i < response.items.length; i++){
+
+              if(response.items[i].id.kind == 'youtube#video'){
+
+
+                 html += `<div class="col-md-6 iframe-column">
+                              <a href="https://www.youtube.com/watch?v=${response.items[i].id.videoId}" target="_blank">${response.items[i].snippet.title}</a>
+                              <div class="iframe-container">
+                                <iframe
+                                  class="responsive-iframe"
+                                  src="https://www.youtube.com/embed/${response.items[i].id.videoId}">
+                                </iframe>
+                              </div>
+                            </div>`;
+                }
+                showBtn = true;
+            }
+            if(showBtn){
+              loadMoreBtn.data('nextPageToken', response.nextPageToken).show();
+            }
+            $( "#videos-list" ).append( html);
+        });
+    }
+</script>
