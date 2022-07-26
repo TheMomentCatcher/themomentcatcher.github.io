@@ -3,55 +3,55 @@ layout: page
 title: Pieces Of Sound
 
 ---
-<p>
-  The soundscape is not just sound, it is like a picture, it must transfer the listener into the recording environment, it must evoke emotions and memories.
-</p>
+<div class="container blogpost">
+  <p>
+    The soundscape is not just sound, it is like a picture, it must transfer the listener into the recording environment, it must evoke emotions and memories.
+  </p>
 
-<p>
-  Nowadays, it is increasingly difficult to find a place where the sound environment is clean and unpolluted by aircraft, motor vehicles and human presence.
-</p>
+  <p>
+    Nowadays, it is increasingly difficult to find a place where the sound environment is clean and unpolluted by aircraft, motor vehicles and human presence.
+  </p>
 
-<p>
-  These are some of my recordings that are very special to me, most of them were recorded in places where I went on vacation with my family or on a trip to the mountains.
-</p>
+  <p>
+    These are some of my recordings that are very special to me, most of them were recorded in places where I went on vacation with my family or on a trip to the mountains.
+  </p>
 
-<p>
-  I hope you like them!
-</p>
+  <p>
+    I hope you like them!
+  </p>
 
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-        (function ($) {
-            $.fn.scembed = function(){
-            var datasource  = 'https://soundcloud.com/oembed';
-            return this.each(function () {
-                var container = $(this);
-                var mediasource = '{{ site.soundcloud }}';
-                var params = 'url=' + mediasource + '&format=json&iframe=true&auto_play=false&show_comments=true';
-                $.ajaxopts = $.extend($.ajaxopts, {
-                                    url: datasource,
-                                    data: params,
-                                    dataType: 'json',
-                                    success: function (data, status, raw) {
-                                        $(container).html(data.html);
-                                    },
-                                    error: function (data, e1, e2) {
-                                        $(container).html("Can't retrieve player for " + mediasource);
-                                    },
-                                });
-                $.ajax($.ajaxopts);
-                });
-            };
-        })(jQuery);
+  <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(event) {
+          (function ($) {
+              $.fn.scembed = function(){
+              var datasource  = 'https://soundcloud.com/oembed';
+              return this.each(function () {
+                  var container = $(this);
+                  var mediasource = '{{ site.soundcloud }}';
+                  var params = 'url=' + mediasource + '&format=json&iframe=true&auto_play=false&show_comments=true';
+                  $.ajaxopts = $.extend($.ajaxopts, {
+                                      url: datasource,
+                                      data: params,
+                                      dataType: 'json',
+                                      success: function (data, status, raw) {
+                                          $(container).html(data.html);
+                                      },
+                                      error: function (data, e1, e2) {
+                                          $(container).html("Can't retrieve player for " + mediasource);
+                                      },
+                                  });
+                  $.ajax($.ajaxopts);
+                  });
+              };
+          })(jQuery);
 
-        $(function(){
-            $("div.sc-embed").scembed();
-        });
-    });
-
-
-</script>
+          $(function(){
+              $("div.sc-embed").scembed();
+          });
+      });
 
 
+  </script>
 
-<div class="sc-embed"></div>
+  <div class="sc-embed"></div>
+</div>
